@@ -4,6 +4,8 @@
 
 **PageHawk** is a web reconnaissance tool that automatically visits and screenshots web services across multiple targets and ports. It supports IP addresses, URLs, domains, CIDR ranges, and Nmap XML output files as input.
 
+Exports a fancy HTML file with the results.
+
 ## Features
 - **Multiple input formats**: IP addresses, URLs, domains, CIDR ranges, Nmap XML files, or text files
 - **Automatic protocol detection**: Tries both HTTP and HTTPS for each target:port combination
