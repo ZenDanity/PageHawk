@@ -1,0 +1,23 @@
+{
+    "ips": [
+        {
+            "ip":"",
+            "url":"",
+            "ports": [
+                {
+                    "80": {
+                        "response": "",
+                        "visited_first": "",
+                        "visited_last": "",
+                        "user_agent": "",
+                        "screenshot_path_full": "",
+                        "screenshot_path_relative": "",
+                        "screenshot_pathname": "",
+                        "screenshot_filename":""
+
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PageHawk - Reconnaissance Report</title>
+    {{CSS_PLACEHOLDER}}
+    {{DATA_PLACEHOLDER}}
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <img src="pagehawk_logo.png" alt="PageHawk Logo" class="logo">
+                <p class="tagline">Reconnaissance Report</p>
+                    <div class="sidebar-links">
+                        <a href="https://www.buymeacoffee.com/ZenDanity" target="_blank" class="sidebar-link" title="Buy me a coffee">
+                            <span class="link-icon">☕</span>
+                            <span class="link-text">Coffee</span>
+                        </a>
+                        <a href="https://github.com/ZenDanity/pagehawk" target="_blank" class="sidebar-link" title="View on GitHub">
+                            <span class="link-icon">🐙</span>
+                            <span class="link-text">GitHub</span>
+                        </a>
+                        <a href="https://donate.example.com" target="_blank" class="sidebar-link" title="Donate">
+                            <span class="link-icon">💝</span>
+                            <span class="link-text">Donate</span>
+                        </a>
+                    </div>
+            </div>
+            
+            <div class="nav-menu">
+                <button class="nav-item active" data-view="overview">
+                    <span class="nav-icon">🎯</span>
+                    <span class="nav-text">Overview</span>
+                </button>
+                <button class="nav-item" data-view="table">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Table</span>
+                </button>
+                <button class="nav-item" data-view="outputs">
+                    <span class="nav-icon">📦</span>
+                    <span class="nav-text">Outputs</span>
+                </button>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="stats-mini">
+                    <div class="stat-mini">
+                        <span class="stat-mini-label">Total Scanned</span>
+                        <span class="stat-mini-value" id="total-scanned">0</span>
+                    </div>
+                    <div class="stat-mini">
+                        <span class="stat-mini-label">Accessible</span>
+                        <span class="stat-mini-value success" id="accessible">0</span>
+                    </div>
+                    <div class="stat-mini">
+                        <span class="stat-mini-label">Unreachable</span>
+                        <span class="stat-mini-value danger" id="unreachable">0</span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Overview Section -->
+            <section class="content-section active" id="overview-section">
+                <div class="overview-layout">
+                    <!-- Left: Screenshot Display -->
+                    <div class="screenshot-panel">
+                        <div class="legend">
+                            <span class="legend-item">
+                                <span class="legend-circle legend-success"></span>
+                                <span class="legend-text">HTTP Code Ok</span>
+                            </span>
+                            <span class="legend-item">
+                                <span class="legend-circle legend-error"></span>
+                                <span class="legend-text">HTTP Error Code or unreachable</span>
+                            </span>
+                        </div>
+                        <div class="screenshot-grid" id="screenshot-grid">
+                            <!-- Thumbnails will be populated here -->
+                        </div>
+                        <button class="collapse-toggle" id="collapse-toggle" title="Toggle viewer">
+                            <span class="collapse-arrow">▼</span>
+                        </button>
+                        <div class="screenshot-viewer" id="screenshot-viewer">
+                            <div class="viewer-placeholder">
+                                <div class="placeholder-icon">🖼️</div>
+                                <p>Select a screenshot to view details</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Details Panel -->
+                    <div class="details-panel">
+                        <div class="details-header">
+                            <h3>Details</h3>
+                        </div>
+                        <div class="details-content" id="details-content">
+                            <div class="details-placeholder">
+                                <div class="placeholder-icon">📋</div>
+                                <p>No screenshot selected</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Table Section -->
+            <section class="content-section" id="table-section">
+                <div class="table-controls">
+                    <div class="table-search">
+                        <input type="text" class="search-input" placeholder="🔍 Search..." id="table-search">
+                    </div>
+                    <div class="table-actions">
+                        <button class="action-btn" id="export-json-full">
+                            <span>📦</span> JSON Full
+                        </button>
+                        <button class="action-btn" id="export-json-current">
+                            <span>📋</span> JSON Current View
+                        </button>
+                        <button class="action-btn" id="export-csv-full">
+                            <span>📦</span> CSV Full
+                        </button>
+                        <button class="action-btn" id="export-csv-current">
+                            <span>📄</span> CSV Current View
+                        </button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table class="data-table" id="data-table">
+                        <thead>
+                            <tr>
+                                <th data-column="ip" class="sortable">Target (IP/URL)</th>
+                                <th data-column="port" class="sortable">Port</th>
+                                <th data-column="response" class="sortable">Response</th>
+                                <th data-column="visited_first" class="sortable">First Visit</th>
+                                <th data-column="visited_last" class="sortable">Last Visit</th>
+                                <th data-column="user_agent">User Agent</th>
+                                <th data-column="screenshot">Screenshot</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            <!-- Table rows will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Outputs Section -->
+            <section class="content-section" id="outputs-section">
+                <div class="outputs-grid">
+                    <!-- Output Box 1: All Targets (without ports) -->
+                    <div class="output-box">
+                        <div class="output-header">
+                            <h3>All Targets <span class="subtitle">(without ports)</span></h3>
+                            <div class="output-actions">
+                                <button class="output-btn format-btn" data-output="all-targets-no-ports" data-format="json">JSON</button>
+                                <button class="output-btn format-btn" data-output="all-targets-no-ports" data-format="csv">CSV</button>
+                                <button class="output-btn format-btn" data-output="all-targets-no-ports" data-format="txt">TXT</button>
+                                <button class="output-btn copy-btn" data-output="all-targets-no-ports">Copy</button>
+                            </div>
+                        </div>
+                        <textarea class="output-textarea" id="output-all-targets-no-ports" readonly></textarea>
+                    </div>
+
+                    <!-- Output Box 2: All Targets (with ports) -->
+                    <div class="output-box">
+                        <div class="output-header">
+                            <h3>All Targets <span class="subtitle">(with ports)</span></h3>
+                            <div class="output-actions">
+                                <button class="output-btn format-btn" data-output="all-targets-with-ports" data-format="json">JSON</button>
+                                <button class="output-btn format-btn" data-output="all-targets-with-ports" data-format="csv">CSV</button>
+                                <button class="output-btn format-btn" data-output="all-targets-with-ports" data-format="txt">TXT</button>
+                                <button class="output-btn copy-btn" data-output="all-targets-with-ports">Copy</button>
+                            </div>
+                        </div>
+                        <textarea class="output-textarea" id="output-all-targets-with-ports" readonly></textarea>
+                    </div>
+
+                    <!-- Output Box 3: All Targets With Screenshots (without ports) -->
+                    <div class="output-box">
+                        <div class="output-header">
+                            <h3>All Targets With Screenshots <span class="subtitle">(without ports)</span></h3>
+                            <div class="output-actions">
+                                <button class="output-btn format-btn" data-output="screenshots-no-ports" data-format="json">JSON</button>
+                                <button class="output-btn format-btn" data-output="screenshots-no-ports" data-format="csv">CSV</button>
+                                <button class="output-btn format-btn" data-output="screenshots-no-ports" data-format="txt">TXT</button>
+                                <button class="output-btn copy-btn" data-output="screenshots-no-ports">Copy</button>
+                            </div>
+                        </div>
+                        <textarea class="output-textarea" id="output-screenshots-no-ports" readonly></textarea>
+                    </div>
+
+                    <!-- Output Box 4: All Targets With Screenshots (with ports) -->
+                    <div class="output-box">
+                        <div class="output-header">
+                            <h3>All Targets With Screenshots <span class="subtitle">(with ports)</span></h3>
+                            <div class="output-actions">
+                                <button class="output-btn format-btn" data-output="screenshots-with-ports" data-format="json">JSON</button>
+                                <button class="output-btn format-btn" data-output="screenshots-with-ports" data-format="csv">CSV</button>
+                                <button class="output-btn format-btn" data-output="screenshots-with-ports" data-format="txt">TXT</button>
+                                <button class="output-btn copy-btn" data-output="screenshots-with-ports">Copy</button>
+                            </div>
+                        </div>
+                        <textarea class="output-textarea" id="output-screenshots-with-ports" readonly></textarea>
+                    </div>
+
+                    <!-- Output Box 5: Unreachable Targets -->
+                    <div class="output-box">
+                        <div class="output-header">
+                            <h3>Unreachable Targets</h3>
+                            <div class="output-actions">
+                                <button class="output-btn format-btn" data-output="unreachable" data-format="json">JSON</button>
+                                <button class="output-btn format-btn" data-output="unreachable" data-format="csv">CSV</button>
+                                <button class="output-btn format-btn" data-output="unreachable" data-format="txt">TXT</button>
+                                <button class="output-btn copy-btn" data-output="unreachable">Copy</button>
+                            </div>
+                        </div>
+                        <textarea class="output-textarea" id="output-unreachable" readonly></textarea>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Image Modal -->
+    <div class="image-modal" id="image-modal">
+        <div class="modal-backdrop" id="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close">✕</button>
+            <img class="modal-image" id="modal-image" src="" alt="Full size screenshot">
+        </div>
+    </div>
+
+    {{JS_PLACEHOLDER}}
+</body>
+</html>
