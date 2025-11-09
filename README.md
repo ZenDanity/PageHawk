@@ -1,3 +1,5 @@
+![PageHawk Logo](https://raw.githubusercontent.com/ZenDanity/PageHawk/refs/heads/main/pagehawk_logo.png "PageHawk Logo")
+
 # About
 
 **PageHawk** is a web reconnaissance tool that automatically visits and screenshots web services across multiple targets and ports. It supports IP addresses, URLs, domains, CIDR ranges, and Nmap XML output files as input.
